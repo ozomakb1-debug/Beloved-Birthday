@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Randa Birthday Store</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #faf6ff;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #ff7ac4, #b86bff);
+      padding: 60px 20px;
+      text-align: center;
+      color: white;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      color: #7a2ba0;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform .2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .card h3 {
+      margin: 10px 0;
+      font-size: 1.3rem;
+      color: #7a2ba0;
+    }
+    .card p {
+      font-size: 0.95rem;
+    }
+    .price {
+      font-size: 1.2rem;
+      margin: 10px 0;
+      color: #ff2e8e;
+      font-weight: bold;
+    }
+    .buy-btn {
+      padding: 12px 20px;
+      background: #ff2e8e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+    .buy-btn:hover {
+      background: #e0267e;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: #f1e1ff;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Randa Birthday Store 🎉</h1>
+    <p>Exclusive Gifts • Limited Editions • Special Offers</p>
+  </header>
+
+  <h2 class="section-title">Featured Products</h2>
+
+  <section class="products">
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250.png?text=Gift+Box+1" alt="Gift 1" />
+      <h3>Elegant Birthday Box</h3>
+      <p>A premium gift box made specially for Randa’s birthday celebration.</p>
+      <div class="price">$29.99</div>
+      <button class="buy-btn">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250.png?text=Necklace" alt="Necklace" />
+      <h3>Heart Necklace</h3>
+      <p>A beautiful heart-shaped necklace to express love and appreciation.</p>
+      <div class="price">$49.99</div>
+      <button class="buy-btn">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250.png?text=Perfume" alt="Perfume" />
+      <h3>Signature Perfume</h3>
+      <p>A sweet and elegant fragrance inspired by Randa’s charm.</p>
+      <div class="price">$69.99</div>
+      <button class="buy-btn">Buy Now</button>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2025 Randa Birthday Store — Made with love
+  </footer>
+
+</body>
+</html>
