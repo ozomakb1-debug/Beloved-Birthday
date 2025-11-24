@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Randa Birthday Store</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #faf6ff;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #ff7ac4, #b86bff);
+      padding: 60px 20px;
+      text-align: center;
+      color: white;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      color: #7a2ba0;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform .2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .card h3 {
+      margin: 10px 0;
+      font-size: 1.3rem;
+      color: #7a2ba0;
+    }
+    .card p {
+      font-size: 0.95rem;
+    }
+    .price {
+      font-size: 1.2rem;
+      margin: 10px 0;
+      color: #ff2e8e;
+      font-weight: bold;
+    }
+    .buy-btn {
+      padding: 12px 20px;
+      background: #ff2e8e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+    .buy-btn:hover {
+      background: #e0267e;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: #f1e1ff;
+      font-size: 0.9rem;
+    }
+
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+    .modal-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 520px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .modal h2 {
+      margin-top: 0;
+      color: #7a2ba0;
+    }
+    .close-btn {
+      background: #ddd;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    .cake-svg {
+      width: 100%;
+      height: auto;
+      max-height: 320px;
+    }
+
+    /* Simple confetti animation (small) */
+    .confetti {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9998;
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 14px;
+      opacity: 0.9;
+      animation: fall 2s linear forwards;
+    }
+    @keyframes fall {
+      0% {transform: translateY(-10vh) rotate(0deg);}
+      100% {transform: translateY(110vh) rotate(360deg);}
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Randa Birthday Store 🎉</h1>
+    <p>Exclusive Gifts • Limited Editions • Special Offers</p>
+  </header>
+
+  <h2 class="section-title">Featured Products</h2>
+
+  <section class="products">
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250.png?text=Gift+Box+1" alt="Gift 1" />
+      <h3>Elegant Birthday Box</h3>
+      <p>A premium gift box made specially for Randa’s birthday celebration.</p>
+      <div class="price">$29.99</div>
+      <button class="buy-btn" data-product="1">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250.png?text=Necklace" alt="Necklace" />
+      <h3>Heart Necklace</h3>
+      <p>A beautiful heart-shaped necklace to express love and appreciation.</p>
+      <div class="price">$49.99</div>
+      <button class="buy-btn" data-product="2">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250.png?text=Perfume" alt="Perfume" />
+      <h3>Signature Perfume</h3>
+      <p>A sweet and elegant fragrance inspired by Randa’s charm.</p>
+      <div class="price">$69.99</div>
+      <button class="buy-btn" data-product="3">Buy Now</button>
+    </div>
+
+  </section>
+
+  <!-- Modal for cake -->
+  <div id="cakeModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">Happy Birthday, Randa! 🎂</h2>
+
+      <!-- SVG cake with Randa's name -->
+      <svg class="cake-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Birthday cake with Randa's name">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#ffd1e8"/>
+            <stop offset="1" stop-color="#ff9ccf"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0" x2="1">
+            <stop offset="0" stop-color="#fff1f8"/>
+            <stop offset="1" stop-color="#ffe0f3"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Background circle -->
+        <rect width="100%" height="100%" fill="transparent" />
+
+        <!-- Cake plate -->
+        <ellipse cx="300" cy="320" rx="180" ry="20" fill="#ffe6f2" opacity="0.9" />
+
+        <!-- Cake layers -->
+        <rect x="120" y="200" width="360" height="110" rx="18" fill="url(#g1)" />
+        <rect x="140" y="170" width="320" height="80" rx="16" fill="url(#g2)" />
+
+        <!-- Icing drips -->
+        <path d="M140 170 q20 40 40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="#fff7fb" opacity="0.9" />
+
+        <!-- Candles -->
+        <g>
+          <rect x="230" y="120" width="8" height="50" rx="3" fill="#ffd36b" />
+          <rect x="268" y="100" width="8" height="70" rx="3" fill="#ffd36b" />
+          <rect x="306" y="120" width="8" height="50" rx="3" fill="#ffd36b" />
+
+          <!-- Flames -->
+          <path d="M272 98 q6 -12 12 0 q-6 -4 -12 0" fill="#ffcc66" />
+          <path d="M236 118 q6 -12 12 0 q-6 -4 -12 0" fill="#ffcc66" />
+          <path d="M324 118 q6 -12 12 0 q-6 -4 -12 0" fill="#ffcc66" />
+        </g>
+
+        <!-- Decorative hearts -->
+        <g fill="#ff7ac4" opacity="0.95">
+          <path d="M190 230 c-10 -10 -25 -10 -35 0 c-10 10 -10 25 0 35 l35 35 l35 -35 c10 -10 10 -25 0 -35 c-10 -10 -25 -10 -35 0 z" transform="scale(0.18) translate(800 1000)" />
+        </g>
+
+        <!-- Name text -->
+        <text x="300" y="240" font-family="Georgia, serif" font-size="36" fill="#7a2ba0" text-anchor="middle">Happy Birthday</text>
+        <text x="300" y="275" font-family="Georgia, serif" font-size="48" font-weight="700" fill="#ff2e8e" text-anchor="middle">Randa</text>
+
+      </svg>
+
+      <p style="margin-top:12px;">This cake appears as a special surprise for Randa — made with love.</p>
+      <button id="closeModal" class="close-btn" aria-label="Close">Close</button>
+    </div>
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confetti" class="confetti" aria-hidden="true"></div>
+
+  <footer>
+    © 2025 Randa Birthday Store — Made with love
+  </footer>
+
+  <script>
+    // Show cake modal only when clicking Buy Now for product 1
+    document.addEventListener('DOMContentLoaded', function () {
+      const buttons = document.querySelectorAll('.buy-btn');
+      const modal = document.getElementById('cakeModal');
+      const closeBtn = document.getElementById('closeModal');
+      const confettiContainer = document.getElementById('confetti');
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          const product = btn.getAttribute('data-product');
+          if (product === '1') {
+            showModal();
+          } else {
+            // Placeholder for other products - simple alert
+            alert('This product is available for purchase soon.');
+          }
+        });
+      });
+
+      closeBtn.addEventListener('click', hideModal);
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) hideModal();
+      });
+
+      function showModal() {
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+        launchConfetti();
+      }
+
+      function hideModal() {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        confettiContainer.innerHTML = '';
+      }
+
+      // create simple confetti pieces
+      function launchConfetti() {
+        confettiContainer.innerHTML = '';
+        const colors = ['#ff7ac4', '#ffd36b', '#7a2ba0', '#ff2e8e'];
+        for (let i = 0; i < 24; i++) {
+          const piece = document.createElement('div');
+          piece.className = 'confetti-piece';
+          piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+          piece.style.left = Math.random() * 100 + '%';
+          piece.style.top = -(Math.random() * 20) + 'vh';
+          piece.style.transform = 'translateY(0) rotate(' + (Math.random()*360) + 'deg)';
+          piece.style.animationDelay = (Math.random() * 0.3) + 's';
+          piece.style.width = (6 + Math.random()*12) + 'px';
+          piece.style.height = (8 + Math.random()*16) + 'px';
+          confettiContainer.appendChild(piece);
+        }
+
+        // remove confetti after animation
+        setTimeout(() => { confettiContainer.innerHTML = ''; }, 2200);
+      }
+
+    });
+  </script>
+
+</body>
+</html>
